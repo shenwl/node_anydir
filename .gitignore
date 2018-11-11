@@ -1,0 +1,15 @@
+.idea/
+.vscode/
+.git/
+
+node_modules/
+
+logs/
+*.logs
+npm-debug.log*
+.DS_Store
+*.swp
+package-lock.json
+
+
+
