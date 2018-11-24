@@ -1,5 +1,5 @@
 {
-  "name": "node-anywhere",
+  "name": "node-anydir",
   "version": "0.1.0",
   "description": "node static server",
   "main": "src/app.js",
