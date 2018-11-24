@@ -32,6 +32,7 @@ module.exports = async (req, res, filePath) => {
       if (code === 200) {
         rs = fs.createReadStream(filePath);
       } else {
+        res.statusCode = 206;
         rs = fs.createReadStream(filePath, {start, end});
       }
 
