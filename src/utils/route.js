@@ -4,8 +4,10 @@ const promisify = require('util').promisify;
 const Handlebars = require('handlebars');
 const config = require('../config/defaultConfig');
 const mime = require('mime-types');
+
 const compress = require('./compress');
-const range = require('../utils/range');
+const range = require('./range');
+const isFresh = require('./cache');
 
 const stat = promisify(fs.stat);
 const readdir = promisify(fs.readdir);
@@ -25,6 +27,13 @@ module.exports = async (req, res, filePath) => {
 
       res.statusCode = 200;
       res.setHeader('Content-Type', mime.lookup(ext));
+
+      if (isFresh(stats, req, res)) {
+        res.statusCode = 304;
+        res.end();
+        return;
+      }
+
       let rs;
 
       const {code, start, end} = range(stats.size, req, res);
